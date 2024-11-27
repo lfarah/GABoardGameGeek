@@ -161,7 +161,7 @@ extension BoardGame: XMLObjectDeserialization {
                 languageDependence: node["poll"].withAttribute("name", "language_dependence").value(),
                 links: node["link"].value(),
                 stats: node["statistics"]["ratings"].value(),
-                videos: node["video"].value()
+                videos: node["videos"].value()
             )
         } catch {
             // If any errors occur while parsing this game, throw them as a single exception along
