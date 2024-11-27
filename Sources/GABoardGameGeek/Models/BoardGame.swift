@@ -275,6 +275,6 @@ public struct BoardGameVideo {
 
     /// The `NSURL` to retrieve the video's url.
     public var url: URL? {
-        get { return URL(fromBggUrlString: link) }
+        get { return URL(string: link) }
     }
 }
