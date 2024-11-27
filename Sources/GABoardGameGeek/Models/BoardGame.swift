@@ -75,6 +75,8 @@ public struct BoardGame {
     /// - Note: Not present when `stats` is `false` in the API request.
     public var stats: Statistics?
 
+    public var videos: [BoardGameVideo]
+
     // - Mark: Computed Parameters
 
     /// The name that this game should be sorted on. For example, "The Gallerist" with a `sortIndex` of 5
@@ -260,4 +262,14 @@ public struct GameRank {
 
     /// The weighted average for the rating of the game within this family.
     public var bayesAverage: Double
+}
+
+struct BoardGameVideo {
+    let id: Int
+    let title: String
+    let category: String
+    let language: String
+    let link: URL
+    let username: String
+    let userid: Int
 }
