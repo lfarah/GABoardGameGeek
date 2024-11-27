@@ -160,7 +160,8 @@ extension BoardGame: XMLObjectDeserialization {
                 suggestedPlayerage: node["poll"].withAttribute("name", "suggested_playerage").value(),
                 languageDependence: node["poll"].withAttribute("name", "language_dependence").value(),
                 links: node["link"].value(),
-                stats: node["statistics"]["ratings"].value()
+                stats: node["statistics"]["ratings"].value(),
+                videos: node["video"].value()
             )
         } catch {
             // If any errors occur while parsing this game, throw them as a single exception along
@@ -438,6 +439,21 @@ extension GameRank: XMLElementDeserializable {
             friendlyName: element.value(ofAttribute:"friendlyname"),
             value: (element.value(ofAttribute:"value") as Int?) ?? 0,
             bayesAverage: (element.value(ofAttribute:"bayesaverage") as Double?) ?? 0.0
+        )
+    }
+}
+
+extension BoardGameVideo: XMLElementDeserializable {
+
+    public static func deserialize(_ element: SWXMLHash.XMLElement) throws -> GameRank {
+        return try BoardGameVideo(
+            id: element.value(ofAttribute:"id"),
+            title: element.value(ofAttribute:"title"),
+            category: element.value(ofAttribute:"category"),
+            language: element.value(ofAttribute:"language"),
+            link: element.value(ofAttribute:"link"),
+            username: element.value(ofAttribute:"username"),
+            userid: element.value(ofAttribute:"userid")
         )
     }
 }
