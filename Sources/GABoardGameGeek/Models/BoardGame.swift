@@ -264,7 +264,7 @@ public struct GameRank {
     public var bayesAverage: Double
 }
 
-struct BoardGameVideo {
+public struct BoardGameVideo {
     public let id: Int
     public let title: String
     public let category: String
