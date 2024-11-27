@@ -119,16 +119,16 @@ open class GABoardGameGeek {
     // MARK: - Private Member Variables
 
     /// An `ApiAdapter` to separate out all of the internal Networking and XML Parsing Functionality
-    fileprivate let api: ApiAdapter
+    public let api: ApiAdapter
 
     // MARK: - Constants
 
     /// The BGG URL to use when querying a user's collection
-    fileprivate let collectionUrl = "https://boardgamegeek.com/xmlapi2/collection"
+    public let collectionUrl = "https://boardgamegeek.com/xmlapi2/collection"
 
     /// The BGG URL to use when querying an item by ID
-    fileprivate let itemUrl = "https://boardgamegeek.com/xmlapi2/thing"
+    public let itemUrl = "https://boardgamegeek.com/xmlapi2/thing"
 
     /// The BGG URL to use when performing a search
-    fileprivate let searchUrl = "https://boardgamegeek.com/xmlapi2/search"
+    public let searchUrl = "https://boardgamegeek.com/xmlapi2/search"
 }
