@@ -25,7 +25,7 @@ open class ApiAdapter {
      - parameter retryUntil:   The absolute end time after which we should stop retrying.
      - parameter closure:      The completion closure when we have either finished or failed
      */
-    internal func request<T: XMLObjectDeserialization>(_ url: String,
+    open func request<T: XMLObjectDeserialization>(_ url: String,
                                                        params: [String: String],
                                                        rootElement: String, childElement: String,
                                                        retryUntil: Date = Date(),
