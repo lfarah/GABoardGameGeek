@@ -269,7 +269,12 @@ public struct BoardGameVideo {
     public let title: String
     public let category: String
     public let language: String
-    public let link: URL
+    public let link: String
     public let username: String
     public let userid: Int
+
+    /// The `NSURL` to retrieve the video's url.
+    public var url: URL? {
+        get { return URL(fromBggUrlString: link) }
+    }
 }

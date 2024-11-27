@@ -445,7 +445,7 @@ extension GameRank: XMLElementDeserializable {
 
 extension BoardGameVideo: XMLElementDeserializable {
 
-    public static func deserialize(_ element: SWXMLHash.XMLElement) throws -> GameRank {
+    public static func deserialize(_ element: SWXMLHash.XMLElement) throws -> BoardGameVideo {
         return try BoardGameVideo(
             id: element.value(ofAttribute:"id"),
             title: element.value(ofAttribute:"title"),
