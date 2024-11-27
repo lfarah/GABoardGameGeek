@@ -10,7 +10,7 @@ import Alamofire
 import Foundation
 import SWXMLHash
 
-internal class ApiAdapter {
+open class ApiAdapter {
 
     /**
      Make an API request, and parse the results into a collection of objects. This function optionally
