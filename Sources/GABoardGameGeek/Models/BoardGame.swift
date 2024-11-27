@@ -265,11 +265,11 @@ public struct GameRank {
 }
 
 struct BoardGameVideo {
-    let id: Int
-    let title: String
-    let category: String
-    let language: String
-    let link: URL
-    let username: String
-    let userid: Int
+    public let id: Int
+    public let title: String
+    public let category: String
+    public let language: String
+    public let link: URL
+    public let username: String
+    public let userid: Int
 }
