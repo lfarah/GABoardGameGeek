@@ -66,7 +66,9 @@ open class ApiAdapter {
      - parameter closure: The closure to call with the response
      */
     fileprivate func requestDataOnce(_ baseUrl: String, params: [String: String], closure: @escaping (ApiResult<String>) -> ()) {
-        AF.request(baseUrl, parameters: params)
+        let encoder = URLEncodedFormParameterEncoder(encoder: URLEncodedFormEncoder(spaceEncoding: .plusReplaced))
+
+        return AF.request(baseUrl, parameters: params, encoder: encoder)
             .validate(statusCode: 200...202)
             .validate(contentType: ["text/xml"])
             .responseString { response in
