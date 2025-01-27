@@ -29,9 +29,10 @@ open class ApiAdapter {
                                                        params: [String: String],
                                                        rootElement: String, childElement: String,
                                                        retryUntil: Date = Date(),
+                                                       isCached: Bool = false,
                                                        closure: @escaping (ApiResult<[T]>) -> ()) {
         // Make the raw request, and handle the result
-        requestDataOnce(url, params: params) { result in
+        requestDataOnce(url, params: params, isCached: isCached) { result in
             switch(result) {
             case .success(let xmlString):
                 closure(self.parse(xmlString, rootElement: rootElement, childElement: childElement))
@@ -65,10 +66,14 @@ open class ApiAdapter {
      - parameter params:  The parameters to make the call on. These should be URL Query Encoded already
      - parameter closure: The closure to call with the response
      */
-    fileprivate func requestDataOnce(_ baseUrl: String, params: [String: String], closure: @escaping (ApiResult<String>) -> ()) {
+    fileprivate func requestDataOnce(_ baseUrl: String, params: [String: String], isCached: Bool, closure: @escaping (ApiResult<String>) -> ()) {
         let encoder = URLEncodedFormParameterEncoder(encoder: URLEncodedFormEncoder(spaceEncoding: .plusReplaced))
+        let configuration = URLSessionConfiguration.default
+        configuration.requestCachePolicy = isCached ? .returnCacheDataElseLoad : .reloadRevalidatingCacheData // or another policy that fits your needs
+        configuration.urlCache = URLCache.shared
 
-        AF.request(baseUrl, parameters: params)
+        let session = Session(configuration: configuration)
+        session.request(baseUrl, parameters: params)
             .validate(statusCode: 200...202)
             .validate(contentType: ["text/xml"])
             .responseString { response in
