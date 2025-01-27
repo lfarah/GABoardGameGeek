@@ -68,14 +68,10 @@ open class ApiAdapter {
      */
     fileprivate func requestDataOnce(_ baseUrl: String, params: [String: String], isCached: Bool, closure: @escaping (ApiResult<String>) -> ()) {
         let encoder = URLEncodedFormParameterEncoder(encoder: URLEncodedFormEncoder(spaceEncoding: .plusReplaced))
-        let configuration = URLSessionConfiguration.default
-        configuration.requestCachePolicy = isCached ? .returnCacheDataElseLoad : .reloadRevalidatingCacheData // or another policy that fits your needs
-        configuration.urlCache = URLCache.shared
-
-        let session = Session(configuration: configuration)
-        session.request(baseUrl, parameters: params)
+        AF.request(baseUrl, parameters: params)
             .validate(statusCode: 200...202)
             .validate(contentType: ["text/xml"])
+            .cacheResponse(using: isCached ? .cache : .doNotCache)
             .responseString { response in
                 switch response.result {
                 case .success(let value):
